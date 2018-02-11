@@ -11,7 +11,7 @@ module.exports = {
   // filters for debug
   DEBUG: [
     // 'express:*',
-    // 'crowi:*',
+    'crowi:*',
     'crowi:crowi',
     'crowi:crowi:dev',
     'crowi:crowi:express-init',

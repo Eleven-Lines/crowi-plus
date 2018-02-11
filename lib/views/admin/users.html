@@ -161,6 +161,11 @@
                 Admin
               </span>
               {% endif %}
+              {% if not sUser.authorized %}
+              <span class="label label-primary label-admin">
+                ROM
+              </span>
+              {% endif %}
             </td>
             <td>
               <span class="label {{ css.userStatus(sUser) }}">
@@ -252,6 +257,28 @@
                   </li>
                   {% endif  %}
 
+                  {% if sUser.status == 2 %} {# activated な人だけこのメニューを表示 #}
+                  <li class="divider"></li>
+                  <li class="dropdown-header">権限管理</li>
+
+                  <li class="dropdown-button">
+                    {% if sUser.authorized %}
+                      {% if sUser.username != user.username %}
+                      <form action="/admin/user/{{ sUser._id.toString() }}/unauthorize" method="post">
+                        <input type="hidden" name="_csrf" value="{{ csrf() }}">
+                        <button type="submit" class="btn btn-block btn-warning">編集を禁止する</button>
+                      </form>
+                      {% else %}
+                      <p class="alert alert-danger">自分自身の権限は変更できません</p>
+                      {% endif %}
+                    {% else %}
+                      <form action="/admin/user/{{ sUser._id.toString() }}/authorize" method="post">
+                        <input type="hidden" name="_csrf" value="{{ csrf() }}">
+                        <button type="submit" class="btn btn-block btn-primary">編集を許可する</button>
+                      </form>
+                    {% endif %}
+                  </li>
+                  {% endif %}
                   {% if sUser.status == 2 %} {# activated な人だけこのメニューを表示 #}
                   <li class="divider"></li>
                   <li class="dropdown-header">管理者メニュー</li>

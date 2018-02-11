@@ -32,7 +32,7 @@
       <dd>
         <p class="liker-count">
         <span id="like-count">{{ page.liker.length }}</span>
-        {% if user %}
+        {% if user and user.authorized %}
         <button
           data-csrftoken="{{ csrf() }}"
           data-liked="{% if page.isLiked(user) %}1{% else %}0{% endif %}"

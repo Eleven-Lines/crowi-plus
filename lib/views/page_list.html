@@ -33,12 +33,12 @@
 
       {% if page %}
       <div class="flex-item-action">
-        {% if user %}
+        {% if user and user.authorized %}
         <span id="bookmark-button" data-csrftoken="{{ csrf() }}"></span>
         {% endif %}
       </div>
       <div class="flex-item-action visible-xs visible-sm">
-        {% if user %}
+        {% if user and user.authorized %}
         <button
             data-csrftoken="{{ csrf() }}"
             data-liked="{% if page.isLiked(user) %}1{% else %}0{% endif %}"
@@ -96,11 +96,14 @@
       <a>Create Portal: {{ path }}</a>
       {% endif %}
     </li>
+
+    {% if user and user.authorized %}
     <li {% if req.body.pageForm %}class="active"{% endif %}>
-      <a {% if user %}href="#edit-form" data-toggle="tab"{% endif %} class="edit-button {% if not user %}edit-button-disabled{% endif %}">
+      <a href="#edit-form" data-toggle="tab" class="edit-button">
         <i class="fa fa-pencil-square-o"></i> {{ t('Edit') }}
       </a>
     </li>
+    {% endif %}
 
     {% if not page %}
     <li class="pull-right close-button">
@@ -109,8 +112,9 @@
       </a>
     </li>
     {% else %}
+    {% if user and user.authorized %}
     <li class="dropdown pull-right">
-      <a class="dropdown-toggle {% if not user %}dropdown-disabled{% endif %}" {% if user %}data-toggle="dropdown" href="#"{% endif %}>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-wrench"></i> <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
@@ -118,6 +122,7 @@
       </ul>
     </li>
     <li class="pull-right"><a href="#revision-history" data-toggle="tab"><i class="fa fa-history"></i> History</a></li>
+    {% endif %}
     {% endif %}
   </ul>
 

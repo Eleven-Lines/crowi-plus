@@ -12,7 +12,7 @@
       </div>
       {% if page %}
       <div class="flex-item-action">
-        {% if user %}
+        {% if user and user.authorized %}
         <button
             data-csrftoken="{{ csrf() }}"
             data-liked="{% if page.isLiked(user) %}1{% else %}0{% endif %}"
@@ -21,7 +21,7 @@
         {% endif %}
       </div>
       <div class="flex-item-action">
-        {% if user %}
+        {% if user and user.authorized %}
         <span id="bookmark-button">
           <p class="bookmark-link">
             <i class="fa fa-star-o"></i>
