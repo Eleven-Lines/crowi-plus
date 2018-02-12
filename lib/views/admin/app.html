@@ -175,6 +175,66 @@
       </fieldset>
       </form>
 
+      <form action="/_api/admin/settings/conoha" method="post" class="form-horizontal" id="conohaSettingForm" role="form">
+      <fieldset>
+      <legend>conoha設定</legend>
+        <p class="well">conoha にアクセスするための設定を行います。<br>
+
+          <span class="text-danger"><i class="fa fa-warning"></i> この設定を途中で変更すると、これまでにアップロードしたファイル等へのアクセスができなくなりますのでご注意下さい。</span>
+        </p>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:username]" class="col-xs-3 control-label">APIユーザー名</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="text" name="settingForm[conoha:username]" value="{{ settingForm['conoha:username'] }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:password]" class="col-xs-3 control-label">パスワード</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="password" name="settingForm[conoha:password]" value="{{ settingForm['conoha:password'] }}">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:identityServiceUrl]" class="col-xs-3 control-label">Identity Service URL</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="text" name="settingForm[conoha:identityServiceUrl]" value="{{ settingForm['conoha:identityServiceUrl'] }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:region]" class="col-xs-3 control-label">リージョン</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="text" name="settingForm[conoha:region]" placeholder="例: tyo1" value="{{ settingForm['conoha:region'] }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:tenantId]" class="col-xs-3 control-label">テナントID</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="text" name="settingForm[conoha:tenantId]" placeholder="例: gnct12345678" value="{{ settingForm['conoha:tenantId'] }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="settingForm[conoha:container]" class="col-xs-3 control-label">コンテナ</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="text" name="settingForm[conoha:container]" placeholder="例: crowi" value="{{ settingForm['conoha:container'] }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-xs-6">
+            <input type="hidden" name="_csrf" value="{{ csrf() }}">
+            <button type="submit" class="btn btn-primary">更新</button>
+          </div>
+        </div>
+
+      </fieldset>
+      </form>
       <form action="/_api/admin/settings/plugin" method="post" class="form-horizontal" id="pluginSettingForm" role="form">
       <fieldset>
       <legend>プラグイン設定</legend>
@@ -210,7 +270,7 @@
   </div>
 
   <script>
-    $('#appSettingForm, #mailSettingForm, #awsSettingForm, #pluginSettingForm').each(function() {
+    $('#appSettingForm, #mailSettingForm, #awsSettingForm, #conohaSettingForm, #pluginSettingForm').each(function() {
       $(this).submit(function()
       {
         function showMessage(formId, msg, status) {
