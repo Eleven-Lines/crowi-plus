@@ -31,7 +31,16 @@ module.exports = function(crowi) {
     return pkgcloud.storage.createClient(getConfig());
   };
 
-  const createCachePath = filePath => path.join(crowi.cacheDir, filePath.replace(/\//g, '-'));
+  const createCachePath = filePath => {
+    const match = filePath.match(/([^\/]+)\/(?:.+\/)*([^.]+)/)
+    if (match) {
+      const prefix = match[1].replace(/\//g, '-');
+      const name = match[2];
+      return path.join(crowi.cacheDir, `${prefix}-${name}`);
+    } else {
+      return path.join(crowi.cacheDir, filePath);
+    }
+  };
 
   const lib = awsUploader(crowi);
 
@@ -59,7 +68,7 @@ module.exports = function(crowi) {
     }),
 
     findDeliveryFile: (fileId, filePath) => new Promise((resolve, reject) => {
-      const cacheFile = lib.createCacheFileName(fileId);
+      const cacheFile = createCachePath(filePath);
       debug('find delivery file', cacheFile);
       if (!lib.shouldUpdateCacheFile(cacheFile)) {
         return resolve(cacheFile);
