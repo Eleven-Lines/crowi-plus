@@ -15,6 +15,7 @@ import MathJaxConfigurer from './markdown-it/mathjax';
 import PlantUMLConfigurer from './markdown-it/plantuml';
 import TableConfigurer from './markdown-it/table';
 import TocAndAnchorConfigurer from './markdown-it/toc-and-anchor';
+import MermaidConfigurer from './markdown-it/mermaid';
 
 export default class GrowiRenderer {
 
@@ -72,6 +73,7 @@ export default class GrowiRenderer {
     this.markdownItConfigurers = [
       new CommonPluginsConfigurer(crowi),
       new HeaderConfigurer(crowi),
+      new MermaidConfigurer(crowi),
       new TableConfigurer(crowi),
       new EmojiConfigurer(crowi),
       new MathJaxConfigurer(crowi),
