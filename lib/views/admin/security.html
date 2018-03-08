@@ -224,6 +224,9 @@
           </p>
           <ul class="nav nav-tabs" role="tablist" {% if isRestartingServerNeeded %}style="opacity: 0.4;"{% endif %}>
             <li class="active">
+              <a href="#passport-mikan" data-toggle="tab" role="tab"><i class="fa fa-paper-plane"></i> Mikan</a>
+            </li>
+            <li>
               <a href="#passport-ldap" data-toggle="tab" role="tab"><i class="fa fa-sitemap"></i> LDAP</a>
             </li>
             <li>
@@ -241,7 +244,11 @@
           </ul>
 
           <div class="tab-content" {% if isRestartingServerNeeded %}style="opacity: 0.4;"{% endif %}>
-            <div id="passport-ldap" class="tab-pane active" role="tabpanel" >
+            <div id="passport-mikan" class="tab-pane active" role="tabpanel" >
+              {% include './widget/passport/mikan.html' with { settingForm: settingForm } %}
+            </div>
+
+            <div id="passport-ldap" class="tab-pane" role="tabpanel" >
               {% include './widget/passport/ldap.html' with { settingForm: settingForm } %}
             </div>
 
